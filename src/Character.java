@@ -15,8 +15,8 @@ public class Character {
 		exp = 0;
 		health = 100;
 		maxHealth = 100;
-		attack = 0;
-		defence = 0;
+		attack = 20;
+		defence = 20;
 		enemiesDefeted = 0;
 	}
 	public Character(String character, int lvl, double xp, int hp, int mHP, int att, int def, int count) {
@@ -57,28 +57,28 @@ public class Character {
 	}
 	
 	//getter classes defined here
-	public String getName(String character) {
+	public String getName() {
 		return name;
 	}
-	public int getLevel(int lvl) {
+	public int getLevel() {
 		return level;
 	}
-	public double getEXP(double xp) {
+	public double getEXP() {
 		return exp;
 	}
-	public int getHP(int hp) {
+	public int getHP() {
 		return health;
 	}
-	public int getMHP(int mHP) {
+	public int getMHP() {
 		return maxHealth;
 	}
-	public int getATT(int att) {
+	public int getATT() {
 		return attack;
 	}
-	public int getDEF(int def) {
+	public int getDEF() {
 		return defence;
 	}
-	public int getEnemiesDefeted(int count) {
+	public int getEnemiesDefeted() {
 		return enemiesDefeted;
 	}
 	
@@ -110,7 +110,7 @@ public class Character {
 	public void DEFup(int statpoints) {
 		defence += statpoints;
 	}
-	public void enemieKilled() {
+	public void enemyKilled() {
 		enemiesDefeted++;
 	}
 }
