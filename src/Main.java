@@ -81,18 +81,37 @@ public class Main {
 					} else if (flee.equals("N")){
 						break;
 					} else {
-						System.out.println("Invalid input!");
+						System.out.println("\t#INVALID INPUT#");
 					}
 				}	
 			}
 			if (player.getHP() < 1) {
-				System.out.println("You have been defeted in battle.. game over");
-				System.out.println("Score: " + player.getEnemiesDefeted()*500 + " points");
+				System.out.println("\t#You have been defeted in battle.. game over#");
+				System.out.println("\t Score: " + player.getEnemiesDefeted()*500 + " points");
 				break;
 			}
 			System.out.println("-------------------------------------------------");
 			System.out.println("\t# " + forestMonster.getMonster() + " was defeted! # ");
 			player.enemyKilled();
+			System.out.println("\tWould you like to continue into the forest or turn back and retire?");
+			System.out.println("\t1. Continue");
+			System.out.println("\t2. Retire");
+			
+			input = in.nextLine();
+			
+			while (!input.equals("1") && !input.equals("2")) {
+				System.out.println("\t#INVALID INPUT#");
+				input = in.nextLine();
+			}
+			
+			if (input.equals("1")) {
+				continue FOREST;
+			} else if (input.equals("2")) {
+				System.out.println("\t#You decide to leave the forest and retire. Congratulations!#");
+				System.out.println("\t Score: " + (player.getEnemiesDefeted()*1000)*(player.getHP()/10) + " points");
+				break;
+			}
+			
 		}
 	}
 }
