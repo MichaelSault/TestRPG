@@ -1,3 +1,4 @@
+import java.util.*;
 
 public class Character {
 	private String name;	//character name
@@ -8,6 +9,7 @@ public class Character {
 	private int attack;
 	private int defence;
 	private int enemiesDefeted;
+	private String [] moves;
 
 	public Character(){
 		name = "player";
@@ -18,8 +20,10 @@ public class Character {
 		attack = 20;
 		defence = 20;
 		enemiesDefeted = 0;
-	}
-	public Character(String character, int lvl, double xp, int hp, int mHP, int att, int def, int count) {
+		moves = new String[3];
+ 	}
+	
+	public Character(String character, int lvl, double xp, int hp, int mHP, int att, int def, int count, String starterMove) {
 		name = character;
 		level = lvl;
 		exp = xp;
@@ -28,6 +32,7 @@ public class Character {
 		attack = att;
 		defence = def;
 		enemiesDefeted = count;
+		moves [0] = starterMove;
 	}
 	
 	//setter classes defined here
@@ -55,6 +60,9 @@ public class Character {
 	public void setEnemiesDefeted(int count) {
 		enemiesDefeted = count;
 	}
+	public void setMoves(String [] newMoves) {
+		moves = newMoves;
+	}
 	
 	//getter classes defined here
 	public String getName() {
@@ -80,6 +88,9 @@ public class Character {
 	}
 	public int getEnemiesDefeted() {
 		return enemiesDefeted;
+	}
+	public String [] getMoves() {
+		return moves;
 	}
 	
 	//Status classes
@@ -113,4 +124,48 @@ public class Character {
 	public void enemyKilled() {
 		enemiesDefeted++;
 	}
+	
+	//move classes
+	public boolean addMove(String newMove) {
+		for (int i = 0; i <= 3; i++) {
+			if (moves[i] != null) {
+				moves[i] = newMove;
+				return true;
+			}
+		}
+		return false;	//returns false if the user must be asked to replace an old move
+	}
+	
+	public int getMovePosition(String move) {
+		for (int i = 0; i < moves.length; i++) {
+			if (move == moves[i]) {
+				return i;
+			}
+		}
+		return -1; //used as placeholder if no move found
+	}
+	
+	public void swapMove(int movePos, String move) {
+		moves[movePos] = move;
+	}
+	
+	public void deleteMoveAtPostition(int movePos) { //need to test
+		String[] outArray = new String[3]; 
+		int j = 0;
+		
+		for (int i = 0; i >= 3; i++) {
+			if (i == movePos) {
+				i++;
+			} else {
+				outArray[j] = moves[i];
+				j++;
+			}
+		}
+		moves = outArray;
+	}
+	
+	
+	
+	
+	
 }
