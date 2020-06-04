@@ -3,6 +3,56 @@ import java.util.Scanner;
 
 
 public class main {
+	
+	//use for now, maybe create a doublearray or hashmap later?
+	int [] attackID = {
+			10,
+			0,
+			100
+	};
+	
+	String [] attackNames = {
+			"strike",
+			"block",
+			"lunge"
+	};
+	
+	int [] damageEnemy = {
+			10,
+			0,
+			100
+	};
+	
+	int [] attackEnemy = {
+			10,
+			0,
+			100
+	};
+	
+	int [] defendEnemy = {
+			10,
+			0,
+			100
+	};
+	
+	int [] damageSelf = {
+			10,
+			0,
+			100
+	};
+	
+	int [] attackSelf = {
+			10,
+			0,
+			100
+	};
+	
+	int [] defendSelf = {
+			10,
+			0,
+			100
+	};
+	
 	public static void main(String [] args) {
 		String charName = welcome();
 		Character player = new Character();
