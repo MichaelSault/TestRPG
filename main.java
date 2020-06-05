@@ -63,10 +63,8 @@ public class main {
 		Scanner in = new Scanner(System.in);	//for user input
 		
 		Random rand = new Random();	//random number user for combat later
-
 		
 		boolean running = true;	//to run a simple loop
-		String monster = null;
 		System.out.println("\t#I hope you're ready, you're about to enter area 1: The Forest#");
 		System.out.println("|-----------------------------------------------------------------------|");
 		System.out.println("\tYou enter the forest and begin to look around and take in your suroundings.");
@@ -76,12 +74,12 @@ public class main {
 				+ "\n\tagaint the source of the sound.  However you're not sure for how long.");
 		System.out.println("|-----------------------------------------------------------------------|");
 		System.out.println("\t##COMBAT HAS BEGUN##");
-		
+		int areaID = 1;
+
 		FOREST:
 		while (running) {
-			
-			Monster forestMonster = new Monster();
-			forestMonster = monstersList[0];
+			Monster forestMonster = new Monster(monstersList[areaID].getEnemiesList(), monstersList[areaID].getMHP(), monstersList[areaID].getHP(), monstersList[areaID].getATT(), monstersList[areaID].getDEF(), monstersList[areaID].getPers());
+
 			System.out.println("|-----------------------------------------------------------------------|");
 			System.out.println("\t#A " + forestMonster.getMonster() + " jumps out from the bush!#");
 			
@@ -116,18 +114,31 @@ public class main {
 				System.out.println("You have a " + enemyPersistence + "% chance of failure, try anyways?");
 				System.out.println("Y/N");
 				String flee = in.nextLine();
-				if (flee.equals("Y")) {
+				
+				if (flee.equals("Y")||flee.equals("y")) {
 					int fleeRate = rand.nextInt(100);
 					if (fleeRate > enemyPersistence) {
 						System.out.println("You have flee'd from the mob!");
-						continue FOREST;	//starts game from the label FOREST;
+						String areaFlee = "p";
+						while((!areaFlee.equals("Y"))&&(!areaFlee.equals("y"))&&(!areaFlee.equals("N"))&&(!areaFlee.equals("n"))) {
+							System.out.println("Would you like to retire?");
+							System.out.println("Y/N");
+							areaFlee = in.nextLine();
+							if (areaFlee.equals("Y")||areaFlee.equals("y")) {
+								retire(player);
+								return;
+							} else if (areaFlee.equals("N")||areaFlee.equals("n")) {
+								continue FOREST;	//starts game from the label FOREST;
+							} else System.out.println("\t#INVALID INPUT#");
+						}
+						
 					} else {
 						System.out.println("You attempted to flee but the moster caught up to you.");
 						int damageTaken = rand.nextInt(forestMonster.getATT());
 						player.damaged(damageTaken);
 						System.out.println("\tThe " + forestMonster.getMonster() + " strikes you across the back, you take " + damageTaken + " damage!");
 					}
-				} else if (flee.equals("N")){
+				} else if (flee.equals("N")||flee.equals("n")){
 					break;
 				} else {
 					System.out.println("\t#INVALID INPUT#");
@@ -156,10 +167,14 @@ public class main {
 		if (input.equals("1")) {
 			continue FOREST;
 		} else if (input.equals("2")) {
-			System.out.println("\t#You decide to leave the forest and retire. Congratulations!#");
-			System.out.println("\t Score: " + (player.getEnemiesDefeted()*1000)*(player.getHP()/10) + " points");
-			break;
+			retire(player);
+			return;
 		}
-		}
+	}
+	}
+	
+	public static void retire(Character player) {
+		System.out.println("\t#You decide to leave the forest and retire. Congratulations!#");
+		System.out.println("\t Score: " + (player.getEnemiesDefeted()*1000)*(player.getHP()/10) + " points");
 	}
 }
