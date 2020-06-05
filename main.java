@@ -5,60 +5,38 @@ import java.util.Scanner;
 public class main {
 	
 	//use for now, maybe create a doublearray or hashmap later?
-	int [] attackID = {
-			10,
-			0,
-			100
+	//moveID, moveName, selfDamage, enemyDamage, selfAttack, enemyAttack, selfDefence, enemyDefence
+	static Moves [] movesList = new Moves [] {
+			new Moves(1, "slash", 0, 10, 0, 0, 0, 0),
+			new Moves(2, "block", 0, 0, 0, 0, 10, 0),
+			new Moves(3, "intimidate", 0, 0, 0, -10, 0, -10),
+			new Moves(4, "life steal", -5, 10, 0, 0, 0, 0),
+			new Moves(5, "size up", 0, 0, 10, 0, 0, 0),
+			new Moves(6, "throw sand", 0, 5, 0, 0, 0, -10),
+			new Moves(7, "sheild break", 0, 0, 0, 0, 0, -20),
+			new Moves(8, "raise guard", 0, 0, 0, 0, 20, 0),
+			new Moves(9, "1 inch punch", 0, 20, 0, 0, 0, 0),
+			new Moves(10, "final flash!", 0, 50, -10, 0, -10, 0) //does a ton of damage but lowers all stats.  an end game move probably
 	};
 	
-	String [] attackNames = {
-			"strike",
-			"block",
-			"lunge"
+	// declare monster groups
+	static String[] tutorialMonsters = {"Bush Wolf"};
+	static String[] forestMonsters = {"Goblin", "Bat", "Wolf"};
+
+	//mobs, mHP, HP, ATT, DEF, PER
+	static Monster [] monstersList = new Monster [] {
+			new Monster(tutorialMonsters, 50, 50, 10, 10, 100), //100 persistence so you can't flee
+			new Monster(forestMonsters, 60, 60, 10, 10, 10)
 	};
-	
-	int [] damageEnemy = {
-			10,
-			0,
-			100
-	};
-	
-	int [] attackEnemy = {
-			10,
-			0,
-			100
-	};
-	
-	int [] defendEnemy = {
-			10,
-			0,
-			100
-	};
-	
-	int [] damageSelf = {
-			10,
-			0,
-			100
-	};
-	
-	int [] attackSelf = {
-			10,
-			0,
-			100
-	};
-	
-	int [] defendSelf = {
-			10,
-			0,
-			100
-	};
-	
+		
 	public static void main(String [] args) {
 		String charName = welcome();
 		Character player = new Character();
 		player.setName(charName);
 				
 		tutorialForest(player);
+		
+		//System.out.println(movesList[3].getMoveName());
 
 
 	}
@@ -88,7 +66,6 @@ public class main {
 
 		
 		boolean running = true;	//to run a simple loop
-		String[] forestMonsters = {"Goblin", "Bat", "Wolf"};	//monsters available to fight
 		String monster = null;
 		System.out.println("\t#I hope you're ready, you're about to enter area 1: The Forest#");
 		System.out.println("|-----------------------------------------------------------------------|");
@@ -102,7 +79,9 @@ public class main {
 		
 		FOREST:
 		while (running) {
-			Monster forestMonster = new Monster(forestMonsters, 60, 60, 10, 10, 10);
+			
+			Monster forestMonster = new Monster();
+			forestMonster = monstersList[0];
 			System.out.println("|-----------------------------------------------------------------------|");
 			System.out.println("\t#A " + forestMonster.getMonster() + " jumps out from the bush!#");
 			

@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Character {
 	private String name;	//character name
 	private int level;	//character level
@@ -9,7 +7,7 @@ public class Character {
 	private int attack;
 	private int defence;
 	private int enemiesDefeted;
-	private String [] moves;
+	private Moves [] learnedMoves;
 
 	public Character(){
 		name = "player";
@@ -20,10 +18,10 @@ public class Character {
 		attack = 20;
 		defence = 20;
 		enemiesDefeted = 0;
-		moves = new String[3];
+		learnedMoves = new Moves[3];
  	}
 	
-	public Character(String character, int lvl, double xp, int hp, int mHP, int att, int def, int count, String starterMove) {
+	public Character(String character, int lvl, double xp, int hp, int mHP, int att, int def, int count, Moves starterMove) {
 		name = character;
 		level = lvl;
 		exp = xp;
@@ -32,7 +30,7 @@ public class Character {
 		attack = att;
 		defence = def;
 		enemiesDefeted = count;
-		moves [0] = starterMove;
+		learnedMoves [0] = starterMove;
 	}
 	
 	//setter classes defined here
@@ -60,8 +58,8 @@ public class Character {
 	public void setEnemiesDefeted(int count) {
 		enemiesDefeted = count;
 	}
-	public void setMoves(String [] newMoves) {
-		moves = newMoves;
+	public void setMoves(Moves [] newMoves) {
+		learnedMoves = newMoves;
 	}
 	
 	//getter classes defined here
@@ -89,8 +87,8 @@ public class Character {
 	public int getEnemiesDefeted() {
 		return enemiesDefeted;
 	}
-	public String [] getMoves() {
-		return moves;
+	public Moves [] getMoves() {
+		return learnedMoves;
 	}
 	
 	//Status classes
@@ -126,42 +124,42 @@ public class Character {
 	}
 	
 	//move classes
-	public boolean addMove(String newMove) {
+	public boolean addMove(Moves newMove) {
 		for (int i = 0; i <= 3; i++) {
-			if (moves[i] != null) {
-				moves[i] = newMove;
+			if (learnedMoves[i] != null) {
+				learnedMoves[i] = newMove;
 				return true;
 			}
 		}
 		return false;	//returns false if the user must be asked to replace an old move
 	}
 	
-	public int getMovePosition(String move) {
-		for (int i = 0; i < moves.length; i++) {
-			if (move == moves[i]) {
+	public int getMovePosition(Moves move) {
+		for (int i = 0; i < learnedMoves.length; i++) {
+			if (move == learnedMoves[i]) {
 				return i;
 			}
 		}
 		return -1; //used as placeholder if no move found
 	}
 	
-	public void swapMove(int movePos, String move) {
-		moves[movePos] = move;
+	public void swapMove(int movePos, Moves move) {
+		learnedMoves[movePos] = move;
 	}
 	
 	public void deleteMoveAtPostition(int movePos) { //need to test
-		String[] outArray = new String[3]; 
+		Moves[] outArray = new Moves[3]; 
 		int j = 0;
 		
 		for (int i = 0; i >= 3; i++) {
 			if (i == movePos) {
 				i++;
 			} else {
-				outArray[j] = moves[i];
+				outArray[j] = learnedMoves[i];
 				j++;
 			}
 		}
-		moves = outArray;
+		learnedMoves = outArray;
 	}
 	
 	
