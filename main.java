@@ -34,7 +34,7 @@ public class main {
 		Character player = new Character();
 		player.setName(charName);
 				
-		tutorialForest(player);
+		player = tutorialForest(player);
 		
 		//System.out.println(movesList[3].getMoveName());
 
@@ -58,7 +58,7 @@ public class main {
 	}
 
 
-	public static void tutorialForest(Character player) {
+	public static Character tutorialForest(Character player) {
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);	//for user input
 		
@@ -126,7 +126,7 @@ public class main {
 							areaFlee = in.nextLine();
 							if (areaFlee.equals("Y")||areaFlee.equals("y")) {
 								retire(player);
-								return;
+								return player;
 							} else if (areaFlee.equals("N")||areaFlee.equals("n")) {
 								continue FOREST;	//starts game from the label FOREST;
 							} else System.out.println("\t#INVALID INPUT#");
@@ -168,13 +168,73 @@ public class main {
 			continue FOREST;
 		} else if (input.equals("2")) {
 			retire(player);
-			return;
+			return player;
 		}
 	}
+		return player;
 	}
 	
 	public static void retire(Character player) {
 		System.out.println("\t#You decide to leave the forest and retire. Congratulations!#");
 		System.out.println("\t Score: " + (player.getEnemiesDefeted()*1000)*(player.getHP()/10) + " points");
 	}
+	
+	public static Character StaticCity(Character player) {
+		@SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);	//for user input
+		
+		Random rand = new Random();	//random number user for combat later
+		boolean runningSNAV = false;
+		boolean runningSC = false;
+
+		boolean glint = false;
+		System.out.println("\t#Congratulations on completing the tutorial!#");
+		System.out.println("\t#You exit the forest and see a small city in the clearing.#");
+		System.out.println("\t#Upon closer inspection it appears as if it is a city stuck in time.#");
+		System.out.println("\t#The tavern looks run down and the soldiers look out of practice.#");
+		System.out.println("\t#What would you like to do first?#");
+		
+		STATICNAV:
+			while(runningSNAV) {
+				System.out.println("\t\t 1. Rest at the tavern.");
+				System.out.println("\t\t 2. Talk to the guards.");
+				System.out.println("\t\t 3. Continue to follow the path unprepared.");
+				System.out.println("\t\t 4. Continue to look around.");
+				if (glint) {
+					System.out.println("\t\t 5. Examine the glint in the bush.");
+				}
+				
+				String input = in.nextLine();
+				while (!input.equals("1") && !input.equals("2") && !input.equals("3") && !input.equals("4")) {
+					System.out.println("\t#INVALID INPUT#");
+					input = in.nextLine();
+				}
+				if (input.equals("1")) {
+					//tavern functions
+				} else if (input.equals("2")) {
+					//guard functions
+				} else if (input.equals("3")) {
+					//soggy cave area combat
+				} else if (input.equals("4")) {
+					if (!glint) {
+						System.out.println("\t#You take a moment to pause and look around#\n\t#again, you see the tavern, soldiers and a path leading away from town.#\n"
+							+ "\t#This time you also see a glint of light coming from the bush to your left.");
+					} else {
+						System.out.println("\t#You've already done this.#");
+					}
+		
+				} else if (input.equals("5")) {
+					//you find a dagger
+				}
+				continue STATICNAV;
+			}
+		
+		STATIC:
+			while(runningSC) {
+				
+			}
+
+		return player;
+	}
+
 }

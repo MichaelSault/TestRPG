@@ -100,6 +100,9 @@ public class Character {
 	}
 	public void earnEXP(double xp) {
 		exp += xp;
+		if (exp >= level*level*1000) {
+			level++;
+		}
 	}
 	public void loseEXP(double xp) {
 		exp -= xp;
